@@ -67,7 +67,7 @@ def decode_string(str):
 
 def decode_ingredient(line):
     """Given an ingredient, decode the amount and description, and return a new Ingredient"""
-    # TODO: implement me
+
     pcs = line.split('#')
     decoded_amt = decode_string(pcs[0])
     decoded_desc = decode_string(pcs[1])
@@ -76,7 +76,13 @@ def decode_ingredient(line):
 
 def main():
     """A program that decodes a secret recipe"""
-    # TODO: implement me
+
+    with open('decoded_recipe.txt', 'x') as decoded_recipe:
+        with open('.\\secret_recipe.txt') as secret_recipe:
+            for line in secret_recipe:
+                decoded_line = decode_ingredient(line)
+                decoded_line = ' '.join([decoded_line.amount, decoded_line.description])
+                decoded_recipe.write(decoded_line)
 
 
 if __name__ == "__main__":
