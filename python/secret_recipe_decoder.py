@@ -55,7 +55,7 @@ class Ingredient():
 
 def decode_string(str):
     """Given a string named str, use the Caesar encoding above to return the decoded string."""
-    # TODO: implement me
+
     decoded_str = ""
     for char in str:
         if ENCODING.get(char) is None:
@@ -68,9 +68,9 @@ def decode_string(str):
 def decode_ingredient(line):
     """Given an ingredient, decode the amount and description, and return a new Ingredient"""
     # TODO: implement me
-    decoded_amt = ""
-    decoded_desc = ""
-
+    pcs = line.split('#')
+    decoded_amt = decode_string(pcs[0])
+    decoded_desc = decode_string(pcs[1])
     return Ingredient(decoded_amt, decoded_desc)
 
 
