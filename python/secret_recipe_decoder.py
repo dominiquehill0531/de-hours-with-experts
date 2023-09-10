@@ -41,10 +41,12 @@ ENCODING = {
     '9': '7',
     '1': '8',
     '6': '9'
- }
+}
 
 """An ingredient has an amount and a description.
 For example: an Ingredient could have "1 cup" as the amount and "butter" as the description."""
+
+
 class Ingredient():
     def __init__(self, amount, description) -> None:
         self.amount = amount
@@ -53,19 +55,35 @@ class Ingredient():
 
 def decode_string(str):
     """Given a string named str, use the Caesar encoding above to return the decoded string."""
-    # TODO: implement me
-    return '1 cup'
+
+    decoded_str = ""
+    for char in str:
+        if ENCODING.get(char) is None:
+            decoded_str += char
+        else:
+            decoded_str += ENCODING.get(char)
+    return decoded_str
 
 
 def decode_ingredient(line):
     """Given an ingredient, decode the amount and description, and return a new Ingredient"""
-    # TODO: implement me
-    return Ingredient("1 cup", "butter")
+
+    pcs = line.split('#')
+    decoded_amt = decode_string(pcs[0])
+    decoded_desc = decode_string(pcs[1])
+    return Ingredient(decoded_amt, decoded_desc)
 
 
 def main():
     """A program that decodes a secret recipe"""
-    # TODO: implement me
+
+    with open('decoded_recipe.txt', 'x') as decoded_recipe:
+        with open('.\\secret_recipe.txt') as secret_recipe:
+            for line in secret_recipe:
+                decoded_line = decode_ingredient(line)
+                decoded_line = ' '.join([decoded_line.amount, decoded_line.description])
+                decoded_recipe.write(decoded_line)
+
 
 if __name__ == "__main__":
     main()
